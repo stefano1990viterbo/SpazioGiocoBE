@@ -15,33 +15,50 @@ public class ModificaPosizioneGiocatoreApplicationService implements
     ModificaPosizioneGiocatoreUseCase {
 
   private static final int spostamento = 50;
+  private static final double velocita = 1;
 
 
   @Override
   public Giocatore modificaPosizione(Giocatore giocatore, DatiInput input) {
+    double angoloDiRotazione = calcoloAngoloDiRotazione(input, giocatore);
+    giocatore.setAngoloDiDirezione(angoloDiRotazione);
     return cambiaPosizione(input.getKeyDown(), giocatore);
+  }
+  public static final int WIDTH = 32;
+  public static final int HEIGHT = 32;
+  private double calcoloAngoloDiRotazione(DatiInput input,Giocatore giocatore) {
+
+
+    double yInvertita= 480-input.getMouseY();
+
+    double x = (giocatore.getX() + WIDTH);
+    double y =  (giocatore.getY() + HEIGHT);
+
+    double dy = (yInvertita - y);
+    double dx = (x - input.getMouseX());
+
+    // Calcola l'angolazione in radianti
+    double angleRadians =  Math.atan2(dx, dy);
+    // Converti l'angolo in grad
+    return Math.toDegrees(angleRadians);
   }
 
 
   private Giocatore cambiaPosizione(int inputKey, Giocatore giocatore) {
 
     if (inputKey == KeysMap.A) {
-      giocatore.setX(giocatore.getX() - spostamento);
-//      this.x -= velocitaNavicella * Gdx.graphics.getDeltaTime();
+      giocatore.setX(giocatore.getX() - spostamento*velocita);
     }
     if (inputKey == KeysMap.D) {
-      giocatore.setX(giocatore.getX() + spostamento);
-//      this.x += velocitaNavicella * Gdx.graphics.getDeltaTime();
+      giocatore.setX(giocatore.getX() + spostamento*velocita);
     }
 
     if (inputKey == KeysMap.W) {
-      giocatore.setY(giocatore.getY() + spostamento);
-//      this.y += velocitaNavicella * Gdx.graphics.getDeltaTime();
+      giocatore.setY(giocatore.getY() + spostamento*velocita);
     }
 
     if (inputKey == KeysMap.S) {
-      giocatore.setY(giocatore.getY() - spostamento);
-//      this.y -= velocitaNavicella * Gdx.graphics.getDeltaTime();
+      giocatore.setY(giocatore.getY() - spostamento*velocita);
     }
     return giocatore;
   }
