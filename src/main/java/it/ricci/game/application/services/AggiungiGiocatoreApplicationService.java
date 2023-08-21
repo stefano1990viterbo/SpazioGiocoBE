@@ -1,6 +1,6 @@
 package it.ricci.game.application.services;
 
-import it.ricci.game.application.ports.AggiungiGiocatoreUseCase;
+import it.ricci.game.application.ports.input.AggiungiGiocatoreUseCase;
 import it.ricci.game.domain.Giocatore;
 import it.ricci.game.domain.StatoGioco;
 import lombok.RequiredArgsConstructor;

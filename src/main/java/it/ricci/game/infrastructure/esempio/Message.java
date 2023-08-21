@@ -1,4 +1,4 @@
-package it.ricci.game.infrastructure.websocket_adapter.esempio;
+package it.ricci.game.infrastructure.esempio;
 
 import lombok.Getter;
 import lombok.Setter;

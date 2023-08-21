@@ -1,8 +1,7 @@
-package it.ricci.game.infrastructure.websocket_adapter.esempio;
+package it.ricci.game.infrastructure.esempio;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -17,7 +16,7 @@ public class TestWebsocketController {
   @MessageMapping("/sendMessage")
   @SendTo("/topic/messages")
   public String broadcastNews(@Payload String message) {
-    log.info("Ricevuto messaggio: "+message);
+//    log.info("Ricevuto messaggio: "+message);
     return message;
   }
 }

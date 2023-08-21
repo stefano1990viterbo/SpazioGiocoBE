@@ -1,11 +1,9 @@
-package it.ricci.game.infrastructure.websocket_adapter;
+package it.ricci.game.infrastructure.input_websocket_adapter.dto;
 
-import it.ricci.game.application.ports.AggiungiGiocatoreUseCase;
-import it.ricci.game.application.ports.ModificaStatoGiocoUseCase;
+import it.ricci.game.application.ports.input.AggiungiGiocatoreUseCase;
 import it.ricci.game.application.ports.RimuoviGiocaoreUseCase;
 import it.ricci.game.domain.Giocatore;
-import it.ricci.game.domain.StatoGioco;
-import it.ricci.game.infrastructure.websocket_adapter.esempio.SocketService;
+import it.ricci.game.infrastructure.esempio.SocketService;
 import java.security.Principal;
 import java.util.Objects;
 import java.util.UUID;
@@ -28,13 +26,6 @@ public class WebSocketEvents {
 
   private final RimuoviGiocaoreUseCase rimuoviGiocaoreUseCase;
 
-  private final ModificaStatoGiocoUseCase modificaStatoGiocoUseCase;
-
-  private final WebsocketGameStatusOutputAdapter websocketGameStatusOutputAdapter;
-
-//  private StatoGioco statoGioco;
-
-
   @EventListener
   public void handleSessionConnected(SessionConnectEvent event) {
     Principal principal = Objects.requireNonNull(event.getUser());
@@ -45,14 +36,14 @@ public class WebSocketEvents {
 
     log.info("Client connessso con sessionid: " + sessionId);
 
+//    Giocatore giocatoreDaAggiungereAlGioco = new Giocatore(GiocatoreId.from(sessionId),
+//        UUID.fromString(principal.getName()));
+
     Giocatore giocatoreDaAggiungereAlGioco = new Giocatore(UUID.fromString(sessionId),
         UUID.fromString(principal.getName()));
 
     Giocatore giocatoreAggiunto = aggiungiGiocatoreUseCase.aggiungiGiocatore(
         giocatoreDaAggiungereAlGioco);
-
-
-    websocketGameStatusOutputAdapter.sendGameStatus(StatoGioco.getInstance());
   }
 
   @EventListener
@@ -73,9 +64,6 @@ public class WebSocketEvents {
 
     Giocatore giocatoreRimosso = rimuoviGiocaoreUseCase.rimuoviGiocatore(
         UUID.fromString(principal.getName()));
-
-    websocketGameStatusOutputAdapter.sendGameStatus(StatoGioco.getInstance());
-
   }
 
 }

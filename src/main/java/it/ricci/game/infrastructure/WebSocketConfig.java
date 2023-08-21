@@ -1,15 +1,11 @@
-package it.ricci.game.infrastructure.websocket_adapter;
+package it.ricci.game.infrastructure;
 
-import it.ricci.game.infrastructure.websocket_adapter.esempio.SocketService;
 import java.security.Principal;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.ServerHttpRequest;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.WebSocketHandler;

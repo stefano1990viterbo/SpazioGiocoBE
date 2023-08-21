@@ -1,9 +1,12 @@
 package it.ricci.game.domain;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -27,7 +30,10 @@ public class StatoGioco {
     return INSTANCE;
   }
 
+
+
   private List<Giocatore> giocatori = new ArrayList<>();
+  private List<Proiettile> proiettili = new ArrayList<>();
 
   public void addGiocatore(Giocatore giocatoreDaAggiungere) {
     giocatori.add(giocatoreDaAggiungere);
@@ -60,6 +66,31 @@ public class StatoGioco {
     }
     return giocatoreInElenco.get();
   }
+
+  public void aggiungiProiettileAlGioco(Proiettile proiettile){
+    proiettili.add(proiettile);
+  }
+
+
+  public static StatoGioco getStatoAttuale(){
+
+    StatoGioco statoGioco = StatoGioco.getInstance();
+
+    List<Proiettile> proiettiliAggiornati= new ArrayList<>();
+    for (Proiettile p: statoGioco.proiettili) {
+      LocalDateTime ora = LocalDateTime.now();
+      Duration duration = Duration.between(p.getInizioSparo(), ora);
+
+      if(duration.getSeconds()<=3){
+        p.aggiornaCoordinateDelProiettile(p);
+        proiettiliAggiornati.add(p);
+      }
+    }
+    statoGioco.setProiettili(proiettiliAggiornati);
+
+    return statoGioco;
+  }
+
 
 
 }

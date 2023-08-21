@@ -1,4 +1,4 @@
-package it.ricci.game.application.ports;
+package it.ricci.game.application.ports.input;
 
 import it.ricci.game.domain.Giocatore;
 

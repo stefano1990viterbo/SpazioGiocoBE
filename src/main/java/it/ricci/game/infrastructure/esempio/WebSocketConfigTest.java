@@ -1,4 +1,4 @@
-package it.ricci.game.infrastructure.websocket_adapter.esempio;
+package it.ricci.game.infrastructure.esempio;
 
 import java.security.Principal;
 import java.util.Map;

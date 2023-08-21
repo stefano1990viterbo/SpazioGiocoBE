@@ -15,16 +15,22 @@ public class Giocatore {
   }
 
   private UUID id;
+//  private GiocatoreId id;
   private UUID username;
 
   private Double x;
   private Double y;
   private Double angoloDiDirezione;
 
-  public Giocatore(UUID id, UUID username) {
+    public Giocatore(UUID id, UUID username) {
     this.id=id;
     this.username=username;
   }
+
+//  public Giocatore(GiocatoreId id, UUID username) {
+//    this.id=id;
+//    this.username=username;
+//  }
 
 
 }

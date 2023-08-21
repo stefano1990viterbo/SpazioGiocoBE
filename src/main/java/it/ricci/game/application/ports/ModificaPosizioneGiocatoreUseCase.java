@@ -1,7 +1,7 @@
 package it.ricci.game.application.ports;
 
 import it.ricci.game.domain.Giocatore;
-import it.ricci.game.infrastructure.websocket_adapter.dto.DatiInput;
+import it.ricci.game.infrastructure.input_websocket_adapter.dto.DatiInput;
 
 public interface ModificaPosizioneGiocatoreUseCase {
 
