@@ -1,8 +1,9 @@
-package it.ricci.game.infrastructure.input_websocket_adapter.dto;
+package it.ricci.game.infrastructure.input_websocket_adapter;
 
 import it.ricci.game.application.ports.input.AggiungiGiocatoreUseCase;
-import it.ricci.game.application.ports.RimuoviGiocaoreUseCase;
-import it.ricci.game.domain.Giocatore;
+import it.ricci.game.application.ports.input.AggiungiGiocatoreUseCase.AggiungiGiocatoreCommand;
+import it.ricci.game.application.ports.input.RimuoviGiocaoreUseCase;
+import it.ricci.game.domain.stato_gioco.Giocatore;
 import it.ricci.game.infrastructure.esempio.SocketService;
 import java.security.Principal;
 import java.util.Objects;
@@ -36,14 +37,11 @@ public class WebSocketEvents {
 
     log.info("Client connessso con sessionid: " + sessionId);
 
-//    Giocatore giocatoreDaAggiungereAlGioco = new Giocatore(GiocatoreId.from(sessionId),
-//        UUID.fromString(principal.getName()));
+    AggiungiGiocatoreCommand command = AggiungiGiocatoreCommand.builder()
+        .username(UUID.fromString(principal.getName())).id(UUID.fromString(sessionId)).build();
 
-    Giocatore giocatoreDaAggiungereAlGioco = new Giocatore(UUID.fromString(sessionId),
-        UUID.fromString(principal.getName()));
-
-    Giocatore giocatoreAggiunto = aggiungiGiocatoreUseCase.aggiungiGiocatore(
-        giocatoreDaAggiungereAlGioco);
+    aggiungiGiocatoreUseCase.aggiungiGiocatore(
+        command);
   }
 
   @EventListener
@@ -62,7 +60,7 @@ public class WebSocketEvents {
     Principal principal = Objects.requireNonNull(event.getUser());
 //    giocoService.rimuoviGiocatore(UUID.fromString(principal.getName()));
 
-    Giocatore giocatoreRimosso = rimuoviGiocaoreUseCase.rimuoviGiocatore(
+    rimuoviGiocaoreUseCase.rimuoviGiocatore(
         UUID.fromString(principal.getName()));
   }
 

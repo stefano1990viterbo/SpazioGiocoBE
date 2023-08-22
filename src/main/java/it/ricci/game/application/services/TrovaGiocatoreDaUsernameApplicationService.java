@@ -1,8 +1,9 @@
 package it.ricci.game.application.services;
 
-import it.ricci.game.application.ports.TrovaGiocatoreDaUsernameUseCase;
-import it.ricci.game.domain.Giocatore;
-import it.ricci.game.domain.StatoGioco;
+import it.ricci.game.application.ports.input.TrovaGiocatoreDaUsernameUseCase;
+import it.ricci.game.application.ports.output.FindGiocatorePort;
+import it.ricci.game.domain.stato_gioco.Giocatore;
+import it.ricci.game.domain.stato_gioco.StatoGioco;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -14,10 +15,10 @@ import org.springframework.stereotype.Service;
 public class TrovaGiocatoreDaUsernameApplicationService implements TrovaGiocatoreDaUsernameUseCase {
 
 //  private StatoGioco statoGioco;
-
+private final FindGiocatorePort findGiocatorePort;
 
   @Override
   public Giocatore giocatoreFromUserName(UUID username) {
-    return StatoGioco.getInstance().trovaGiocatoreFromUsername(username);
+    return findGiocatorePort.trovaGiocatoreDaUsername(username);
   }
 }

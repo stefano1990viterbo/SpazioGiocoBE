@@ -1,5 +1,6 @@
 package it.ricci.game.infrastructure;
 
+import it.ricci.game.application.ports.output.GeneraStanzaPort;
 import java.security.Principal;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,13 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 public class WebSocketConfig
     implements WebSocketMessageBrokerConfigurer {
 
+  private final GeneraStanzaPort generaStanzaPort;
+
   @Override
   public void configureMessageBroker(MessageBrokerRegistry config) {
+
+    generaStanzaPort.generaStanzaGioco();
+
     config.enableSimpleBroker("/topic");
     config.setApplicationDestinationPrefixes("/app");
   }
@@ -48,4 +54,6 @@ public class WebSocketConfig
             });
 
   }
+
+
 }

@@ -1,4 +1,4 @@
-package it.ricci.game.domain;
+package it.ricci.game.domain.stato_gioco;
 
 import java.util.UUID;
 

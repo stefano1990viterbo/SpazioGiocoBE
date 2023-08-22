@@ -1,36 +1,30 @@
-package it.ricci.game.domain;
+package it.ricci.game.domain.stato_gioco;
 
 import java.util.UUID;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
-@Setter
-//@Builder
+@Builder
 @ToString
-public class Giocatore {
+public class Giocatore extends Rettangolo {
 
-  public Giocatore() {
-  }
+  public static final int WIDTH = 32;
+  public static final int HEIGHT = 32;
 
   private UUID id;
-//  private GiocatoreId id;
+  //  private GiocatoreId id;
   private UUID username;
-
-  private Double x;
-  private Double y;
+  @Setter
   private Double angoloDiDirezione;
-
-    public Giocatore(UUID id, UUID username) {
-    this.id=id;
-    this.username=username;
-  }
 
 //  public Giocatore(GiocatoreId id, UUID username) {
 //    this.id=id;
 //    this.username=username;
 //  }
+
 
 
 }

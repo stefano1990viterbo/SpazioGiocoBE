@@ -1,8 +1,8 @@
 package it.ricci.game.application.services;
 
-import it.ricci.game.application.ports.ModificaPosizioneGiocatoreUseCase;
+import it.ricci.game.application.ports.input.ModificaPosizioneGiocatoreUseCase;
 import it.ricci.game.domain.ConfigurazioneGioco;
-import it.ricci.game.domain.Giocatore;
+import it.ricci.game.domain.stato_gioco.Giocatore;
 import it.ricci.game.domain.KeysMap;
 import it.ricci.game.infrastructure.input_websocket_adapter.dto.DatiInput;
 import lombok.RequiredArgsConstructor;
@@ -59,6 +59,7 @@ public class ModificaPosizioneGiocatoreApplicationService implements
   private Giocatore cambiaPosizione(int inputKey, Giocatore giocatore) {
 
     if (inputKey == KeysMap.A) {
+
       giocatore.setX(giocatore.getX() - spostamento * velocita);
     }
     if (inputKey == KeysMap.D) {

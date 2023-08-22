@@ -1,9 +1,20 @@
 package it.ricci.game.application.ports.input;
 
-import it.ricci.game.domain.Giocatore;
+import java.util.UUID;
+import lombok.Builder;
+import lombok.NonNull;
 
 public interface AggiungiGiocatoreUseCase {
 
-  Giocatore aggiungiGiocatore(Giocatore giocatore);
+  void aggiungiGiocatore(AggiungiGiocatoreCommand giocatore);
+
+  @Builder
+  record AggiungiGiocatoreCommand(
+      @NonNull UUID id,
+      @NonNull UUID username
+
+  ) {
+
+  }
 
 }

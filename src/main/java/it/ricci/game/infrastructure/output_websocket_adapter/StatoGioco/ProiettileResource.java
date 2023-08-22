@@ -10,5 +10,7 @@ public class ProiettileResource {
   private UUID id;
   private double x;
   private double y;
-  private double rotazioneInGradi;
+  private double angoloDiDirezione;
+  private int width;
+  private int height;
 }

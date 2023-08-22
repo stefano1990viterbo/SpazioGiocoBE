@@ -1,10 +1,11 @@
-package it.ricci.game.infrastructure.input_websocket_adapter.dto;
+package it.ricci.game.infrastructure.input_websocket_adapter;
 
 import it.ricci.game.application.ports.input.CreaProiettileUseCase;
-import it.ricci.game.application.ports.ModificaPosizioneGiocatoreUseCase;
-import it.ricci.game.application.ports.TrovaGiocatoreDaUsernameUseCase;
-import it.ricci.game.domain.Giocatore;
+import it.ricci.game.application.ports.input.ModificaPosizioneGiocatoreUseCase;
+import it.ricci.game.application.ports.input.TrovaGiocatoreDaUsernameUseCase;
+import it.ricci.game.domain.stato_gioco.Giocatore;
 import it.ricci.game.infrastructure.esempio.SocketService;
+import it.ricci.game.infrastructure.input_websocket_adapter.dto.DatiInput;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,6 +30,10 @@ public class GiocoController {
 
     Giocatore giocatore = trovaGiocatoreDaUsernameUseCase.giocatoreFromUserName(
         UUID.fromString(input.getUsernameKeyboard()));
+
+    if(giocatore== null){
+      return;
+    }
 
     if(input.getKeyDown()!=null || input.getMouseMoved()!=null){
       Giocatore giocatoreConPosizioneCambiata = modificaPosizioneGiocatoreUseCase.modificaPosizione(
