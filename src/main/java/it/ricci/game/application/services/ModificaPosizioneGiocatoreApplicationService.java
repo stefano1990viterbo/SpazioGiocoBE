@@ -16,7 +16,7 @@ public class ModificaPosizioneGiocatoreApplicationService implements
     ModificaPosizioneGiocatoreUseCase {
 
   private static final int spostamento = 50;
-  private static final double velocita = 1;
+  private static final double velocita = 0.10;
 
 
   @Override

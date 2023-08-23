@@ -13,6 +13,7 @@ public class Giocatore extends Rettangolo {
 
   public static final int WIDTH = 32;
   public static final int HEIGHT = 32;
+  public static final int VITE_DEFAULT=4;
 
   private UUID id;
   //  private GiocatoreId id;
@@ -20,10 +21,25 @@ public class Giocatore extends Rettangolo {
   @Setter
   private Double angoloDiDirezione;
 
+  private int vite;
+  private int punteggio;
+
 //  public Giocatore(GiocatoreId id, UUID username) {
 //    this.id=id;
 //    this.username=username;
 //  }
+
+  public void diminuisciVita(int viteDaRimuovere){
+    this.vite = vite-viteDaRimuovere;
+  }
+
+  public boolean isDead(){
+    return this.getVite() <= 0;
+  }
+
+  public boolean haSparatoIlProiettile(Proiettile proiettile){
+    return this.getUsername().equals(proiettile.getGiocatoreSparante());
+  }
 
 
 

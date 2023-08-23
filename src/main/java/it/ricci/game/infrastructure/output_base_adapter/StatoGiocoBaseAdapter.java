@@ -5,6 +5,7 @@ import it.ricci.game.application.ports.output.AggiungiProiettilePort;
 import it.ricci.game.application.ports.output.FindGiocatorePort;
 import it.ricci.game.application.ports.output.GeneraStanzaPort;
 import it.ricci.game.application.ports.output.ModificaStatoGiocoPort;
+import it.ricci.game.application.ports.output.RientraGiocatorePort;
 import it.ricci.game.application.ports.output.RimuoviGiocatorePort;
 import it.ricci.game.application.ports.output.VediStatoAttualeDelGiocoPort;
 import it.ricci.game.domain.stato_gioco.Giocatore;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class StatoGiocoBaseAdapter implements GeneraStanzaPort, VediStatoAttualeDelGiocoPort,
     ModificaStatoGiocoPort, AggiungiGiocatorePort, RimuoviGiocatorePort , AggiungiProiettilePort ,
-    FindGiocatorePort {
+    FindGiocatorePort , RientraGiocatorePort {
 
   private final StatoGiocoBaseRepositorie statoGiocoBaseRepositorie;
 
@@ -69,5 +70,12 @@ public class StatoGiocoBaseAdapter implements GeneraStanzaPort, VediStatoAttuale
   public Giocatore trovaGiocatoreDaUsername(UUID username) {
     StatoGioco statoGioco = statoGiocoBaseRepositorie.vediStato();
     return statoGioco.trovaGiocatoreFromUsername(username);
+  }
+
+  @Override
+  public void faiRientrareIlGiocatoreNellaPartita(Giocatore giocatore) {
+    StatoGioco statoGioco = statoGiocoBaseRepositorie.vediStato();
+    statoGioco.faiRientrareIlGiocatore(giocatore);
+    statoGiocoBaseRepositorie.updateStato(statoGioco);
   }
 }

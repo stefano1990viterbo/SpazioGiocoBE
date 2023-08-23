@@ -83,17 +83,45 @@ public class StatoGioco {
   }
 
 
-  private  void controlloCollisioneGiocatoriConProiettili(
+  private void controlloCollisioneGiocatoriConProiettili(
       List<Proiettile> proiettiliAggiornati, List<Giocatore> giocatori) {
 
-    for (Giocatore g : giocatori) {
-      for (Proiettile p : proiettiliAggiornati) {
-        if (!g.getUsername().equals(p.getGiocatoreSparante()) && g.collideCon(p)) {
-//          StatoGioco.getInstance().rimuoviGiocatore(g.getUsername());
-          this.rimuoviGiocatore(g.getUsername());
+    List<Giocatore> giocatoriDaRimuovere = new ArrayList<>();
+
+    for (Giocatore giocatore : giocatori) {
+
+      List<Proiettile> proiettiliDaRimuovere = new ArrayList<>();
+
+      for (Proiettile proiettile : proiettiliAggiornati) {
+        if (!giocatore.haSparatoIlProiettile(proiettile) && giocatore.collideCon(
+            proiettile) && !proiettile.isDaRimuovere()) {
+          giocatore.diminuisciVita(1);
+          log.info("Vite rimaste: " + giocatore.getVite());
+          if (giocatore.isDead()) {
+//            giocatoriDaRimuovere.add(giocatore);
+          }
+          proiettiliDaRimuovere.add(proiettile);
+          proiettile.setDaRimuovere(true);
         }
       }
+
+      rimuoviIProiettili(proiettiliDaRimuovere);
     }
+    rimuoviIGiocatori(giocatori, giocatoriDaRimuovere);
+  }
+
+  private static void rimuoviIGiocatori(List<Giocatore> giocatori,
+      List<Giocatore> giocatoriDaRimuovere) {
+    giocatori.removeAll(giocatoriDaRimuovere);
+  }
+
+  private void rimuoviIProiettili(List<Proiettile> proiettiliDaRimuovere) {
+    proiettili.removeAll(proiettiliDaRimuovere);
+  }
+
+
+  private static boolean isGiocatoreCheHaSparatoIlProiettile(Giocatore g, Proiettile p) {
+    return g.getUsername().equals(p.getGiocatoreSparante());
   }
 
   private static List<Proiettile> getProiettiles(StatoGioco statoGioco) {
@@ -108,6 +136,11 @@ public class StatoGioco {
       }
     }
     return proiettiliAggiornati;
+  }
+
+  public void faiRientrareIlGiocatore(Giocatore giocatore){
+    this.getGiocatori().removeIf(g-> g.getUsername().equals(giocatore.getUsername()));
+    this.getGiocatori().add(giocatore);
   }
 
 

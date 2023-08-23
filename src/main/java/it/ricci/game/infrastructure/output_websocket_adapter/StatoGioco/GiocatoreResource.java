@@ -17,7 +17,6 @@ public class GiocatoreResource {
 
   private int width;
   private int height;
-
-//  private final int WIDTH = Giocatore.WIDTH;
-//  private final int HEIGHT = Giocatore.HEIGHT;
+  private int vite;
+  private int punteggio;
 }

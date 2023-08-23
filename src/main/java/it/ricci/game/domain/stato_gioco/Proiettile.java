@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Builder
@@ -26,6 +27,9 @@ public class Proiettile extends Rettangolo {
 
   private Double angoloDiDirezione;
   private int velocita;
+
+  @Setter
+  private boolean isDaRimuovere=false;
 
 
 

@@ -24,14 +24,12 @@ public class AggiungiGiocatoreApplicationService implements AggiungiGiocatoreUse
 
     Giocatore giocatoreDaAggiungere = Giocatore.builder()
 
-        .id(command.id()).username(command.username()).build();
+        .id(command.id()).username(command.username()).vite(Giocatore.VITE_DEFAULT).build();
 
     giocatoreDaAggiungere.setY(POSIZIONE_Y_DEFAULT);
     giocatoreDaAggiungere.setX(POSIZIONE_X_DEFAULT);
     giocatoreDaAggiungere.setWidth(Giocatore.WIDTH);
     giocatoreDaAggiungere.setHeight(Giocatore.HEIGHT);
-
-//    StatoGioco.getInstance().addGiocatore(giocatoreDaAggiungere);
 
     aggiungiGiocatorePort.aggiungiGiocatore(giocatoreDaAggiungere);
   }

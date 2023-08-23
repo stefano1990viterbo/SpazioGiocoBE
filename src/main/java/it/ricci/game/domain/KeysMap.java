@@ -7,4 +7,6 @@ public class KeysMap {
   public static final int S= 47;
   public static final int W= 51;
 
+  public static final int R= 46;
+
 }
