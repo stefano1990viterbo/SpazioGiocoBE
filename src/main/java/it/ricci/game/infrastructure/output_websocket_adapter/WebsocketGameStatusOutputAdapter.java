@@ -21,6 +21,7 @@ public class WebsocketGameStatusOutputAdapter {
   private final VediStatoAttualeDelGiocoPort vediStatoAttualeDelGiocoPort;
 
   public void sendGameStatus() {
+    //test
 
 //    StatoGiocoResource statoGiocoResource = statoGiocoMapper.statoGiocoToResource(
 //        StatoGioco.getStatoAttuale());
