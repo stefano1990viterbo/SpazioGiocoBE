@@ -49,6 +49,11 @@ public class GiocoController {
       rietraGiocatoreUsecase.rientraGiocatore(command);
     }
 
+
+    if(giocatore.isFunzioniBloccate()){
+      return;
+    }
+
     if (isInputPerMuovereIlGiocatore(input)) {
       modificaPosizioneGiocatore(giocatore,input);
     }

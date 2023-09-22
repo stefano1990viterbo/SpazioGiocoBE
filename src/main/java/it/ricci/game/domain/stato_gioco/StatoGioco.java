@@ -99,6 +99,7 @@ public class StatoGioco {
           log.info("Vite rimaste: " + giocatore.getVite());
           if (giocatore.isDead()) {
 //            giocatoriDaRimuovere.add(giocatore);
+            giocatore.rimuoviFunzioni();
           }
           proiettiliDaRimuovere.add(proiettile);
           proiettile.setDaRimuovere(true);

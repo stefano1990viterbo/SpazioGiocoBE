@@ -24,6 +24,8 @@ public class Giocatore extends Rettangolo {
   private int vite;
   private int punteggio;
 
+  private boolean funzioniBloccate=false;
+
 //  public Giocatore(GiocatoreId id, UUID username) {
 //    this.id=id;
 //    this.username=username;
@@ -41,6 +43,11 @@ public class Giocatore extends Rettangolo {
     return this.getUsername().equals(proiettile.getGiocatoreSparante());
   }
 
+  public boolean isFunzioniBloccate() {
+    return funzioniBloccate;
+  }
 
-
+  public void rimuoviFunzioni() {
+    funzioniBloccate=true;
+  }
 }
